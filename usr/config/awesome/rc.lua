@@ -237,7 +237,7 @@ awful.screen.connect_for_each_screen(function(s)
         position = "top",
         screen   = s,
         width    = 300,      -- Lebar bar
-        height   = 20,       -- Tinggi bar
+        height   = 24,       -- Tinggi bar
         bg       = "#1e1e2e",
         fg       = "#cdd6f4",
         shape    = function(cr, w, h)
