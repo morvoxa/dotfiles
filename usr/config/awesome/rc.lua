@@ -59,7 +59,7 @@ nice{
 close_color = "#FF5F57",
 minimize_color 	= "#FF5F57",
 maximize_color = "#FF5F57",
-    button_size = 14,
+    button_size = 10,
 titlebar_height = 20,
 }
 
@@ -292,6 +292,8 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey,           }, "b", function () awful.spawn.with_shell("sh ~/dotfiles/usr/bin/polybarstart") end,
+              {description = "reload polybar", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -540,3 +542,4 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 awful.spawn("polybar")
+awful.spawn.with_shell("sh ~/dotfiles/usr/bin/fehupdate")
