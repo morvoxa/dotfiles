@@ -48,6 +48,7 @@ sync_dir "$CONFIG_DIR/$CODE_OSS_DIR" "$HOME_CONFIG/$CODE_OSS_DIR"
 sync_dir "$CONFIG_DIR/kitty" "$HOME_CONFIG/kitty"
 sync_dir "$CONFIG_DIR/polybar" "$HOME_CONFIG/polybar"
 sync_dir "$CONFIG_DIR/rofi" "$HOME_CONFIG/rofi"
+sync_dir "$CONFIG_DIR/starship" "$HOME_CONFIG/starship"
 
 #with no delete
 #sync_dir_no_delete "$CONFIG_DIR/kitty" "$HOME_CONFIG/kitty"

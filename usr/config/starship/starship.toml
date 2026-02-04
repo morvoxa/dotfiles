@@ -1,44 +1,49 @@
-format = """
-$directory$git_branch$git_status$cmd_duration
-$character
-"""
+# Minimal Starship Prompt
 
-# ─────────────────────────
-# DIRECTORY
-# ─────────────────────────
+add_newline = false
+
 [directory]
-style = "bold #0A84FF"
-format = "[$path]($style) "
 truncation_length = 3
 truncation_symbol = "…/"
+style = "cyan"
 
-# ─────────────────────────
-# GIT
-# ─────────────────────────
 [git_branch]
-symbol = " "
-style = "#30D158"
-format = "[$symbol$branch]($style) "
+symbol = " "
+style = "bold purple"
 
 [git_status]
-style = "#FF453A"
-format = "[$all_status$ahead_behind]($style) "
-modified = "●"
-staged = "●"
-untracked = "●"
-deleted = "●"
+conflicted = "⚔️"
+ahead = "⬆️"
+behind = "⬇️"
+staged = "✔️"
+modified = "✏️"
+untracked = "🆕"
+stashed = "📦"
+style = "red"
+format = "($all_status)"
 
-# ─────────────────────────
-# COMMAND DURATION
-# ─────────────────────────
-[cmd_duration]
-min_time = 1000
-style = "#FF9F0A"
-format = "[$duration]($style) "
+[nodejs]
+symbol = "⬢ "
+style = "green"
 
-# ─────────────────────────
-# PROMPT SYMBOL
-# ─────────────────────────
-[character]
-success_symbol = "[❯](#30D158)"
-error_symbol = "[❯](#FF453A)"
+[python]
+symbol = "🐍 "
+style = "yellow"
+
+[docker_context]
+symbol = "🐳 "
+style = "blue"
+
+[kubernetes]
+symbol = "☸️ "
+style = "cyan"
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡"
+discharging_symbol = "🔋"
+style = "bold green"
+
+[time]
+format = "[%H:%M]($style)"
+style = "white"
