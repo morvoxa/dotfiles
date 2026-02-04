@@ -35,7 +35,7 @@ end)
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init("~/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
@@ -582,7 +582,7 @@ ruled.client.connect_signal("request::rules", function()
 	ruled.client.append_rule({
 		id = "titlebars",
 		rule_any = { type = { "normal", "dialog" } },
-		properties = { titlebars_enabled = true },
+		properties = { titlebars_enabled = false },
 	})
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
