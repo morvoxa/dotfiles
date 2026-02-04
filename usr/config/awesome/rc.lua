@@ -248,6 +248,35 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 	})
+	-- Tasklist widget dengan icon + text
+	s.mytasklist = awful.widget.tasklist({
+		screen = s,
+		filter = awful.widget.tasklist.filter.focused, -- hanya window aktif
+		layout = {
+			spacing = 5,
+			layout = wibox.layout.fixed.horizontal,
+		},
+		widget_template = {
+			{
+				{
+					{
+						id = "icon_role",
+						widget = wibox.widget.imagebox, -- icon aplikasi
+					},
+					{
+						id = "text_role",
+						widget = wibox.widget.textbox, -- nama window
+					},
+					layout = wibox.layout.fixed.horizontal,
+					spacing = 5,
+				},
+				left = 5,
+				right = 5,
+				widget = wibox.container.margin,
+			},
+			widget = wibox.container.background,
+		},
+	})
 
 	-- Clock
 	mytextclock = wibox.widget.textclock()
@@ -267,7 +296,7 @@ awful.screen.connect_for_each_screen(function(s)
 	s.mywibox = awful.wibar({
 		position = "top",
 		screen = s,
-		width = 300, -- Lebar bar
+		width = 700, -- Lebar bar
 		height = 24, -- Tinggi bar
 		bg = "#1e1e2e",
 		fg = "#cdd6f4",
@@ -283,9 +312,9 @@ awful.screen.connect_for_each_screen(function(s)
 	-- Setup widget
 	s.mywibox:setup({
 		layout = wibox.layout.align.horizontal,
-		{ layout = wibox.layout.fixed.horizontal }, -- LEFT kosong
-		{ layout = wibox.layout.fixed.horizontal, mylauncher, s.mytaglist, mytextclock, s.mylayoutbox }, -- CENTER
-		{ layout = wibox.layout.fixed.horizontal }, -- RIGHT kosong
+		{ layout = wibox.layout.fixed.horizontal, mylauncher, s.mytaglist }, -- LEFT kosong
+		{ layout = wibox.layout.fixed.horizontal, s.mytasklist }, -- CENTER
+		{ layout = wibox.layout.fixed.horizontal, mytextclock, s.mylayoutbox }, -- RIGHT kosong
 	})
 	s.mywibox:struts({
 		top = s.mywibox.height + s.mywibox.y,
