@@ -253,7 +253,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { layout = wibox.layout.fixed.horizontal }, -- LEFT kosong
-        { layout = wibox.layout.fixed.horizontal, s.mytaglist, mytextclock,s.mylayoutbox,s.mylayoutbox,}, -- CENTER
+        { layout = wibox.layout.fixed.horizontal,mylauncher, s.mytaglist, mytextclock,s.mylayoutbox}, -- CENTER
         { layout = wibox.layout.fixed.horizontal } -- RIGHT kosong
     }
     s.mywibox:struts {
