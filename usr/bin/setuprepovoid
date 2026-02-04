@@ -1,0 +1,5 @@
+
+
+
+echo "repository=https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current" | tee /etc/xbps.d/00-repository-main.conf
+xbps-install -Syu
