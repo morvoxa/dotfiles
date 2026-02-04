@@ -1,66 +1,98 @@
-configuration {
-    modi: "drun,run,window";
-    show-icons: true;
-    icon-theme: "Papirus";
-    drun-display-format: "{icon} {name}";
-    font: "Inter 12";
-    location: 0;
-    fullscreen: false;
-}
+/*******************************************************************************
+ * MACOS SPOTLIGHT LIKE DARK THEME FOR ROFI 
+ * User                 : LR-Tech               
+ * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
+ *******************************************************************************/
 
 * {
-    bg: #1e1e2ecc;
-    bg-alt: #1e1e2eaa;
-    fg: #ffffff;
-    fg-alt: #b4befe;
-    border: #89b4fa;
+    font:   "Montserrat 12";
 
-    background-color: transparent;
-    text-color: @fg;
+    bg0:    #242424E6;
+    bg1:    #7E7E7E80;
+    bg2:    #0860f2E6;
+
+    fg0:    #DEDEDE;
+    fg1:    #FFFFFF;
+    fg2:    #DEDEDE80;
+
+    background-color:   transparent;
+    text-color:         @fg0;
+
+    margin:     0;
+    padding:    0;
+    spacing:    0;
 }
 
 window {
-    transparency: "real";
-    location: center;
-    anchor: center;
-    width: 600px;
-    border-radius: 16px;
-    background-color: @bg;
-    border: 1px;
-    border-color: @border;
-}
+    background-color:   @bg0;
 
-mainbox {
-    padding: 16px;
+    location:       center;
+    width:          640;
+    border-radius:  8;
 }
 
 inputbar {
-    children: [prompt, entry];
-    background-color: @bg-alt;
-    border-radius: 12px;
-    padding: 10px;
+    font:       "Montserrat 20";
+    padding:    12px;
+    spacing:    12px;
+    children:   [ icon-search, entry ];
 }
 
-prompt {
-    enabled: false;
+icon-search {
+    expand:     false;
+    filename:   "search";
+    size: 28px;
+}
+
+icon-search, entry, element-icon, element-text {
+    vertical-align: 0.5;
 }
 
 entry {
-    placeholder: "Search Apps…";
+    font:   inherit;
+
+    placeholder         : "Search";
+    placeholder-color   : @fg2;
+}
+
+message {
+    border:             2px 0 0;
+    border-color:       @bg1;
+    background-color:   @bg1;
+}
+
+textbox {
+    padding:    8px 24px;
 }
 
 listview {
-    lines: 8;
-    spacing: 8px;
-    padding: 8px 0px;
+    lines:      10;
+    columns:    1;
+
+    fixed-height:   false;
+    border:         1px 0 0;
+    border-color:   @bg1;
 }
 
 element {
-    padding: 10px;
-    border-radius: 10px;
+    padding:            8px 16px;
+    spacing:            16px;
+    background-color:   transparent;
 }
 
-element selected {
-    background-color: @fg-alt;
-    text-color: #1e1e2e;
+element normal active {
+    text-color: @bg2;
+}
+
+element selected normal, element selected active {
+    background-color:   @bg2;
+    text-color:         @fg1;
+}
+
+element-icon {
+    size:   1em;
+}
+
+element-text {
+    text-color: inherit;
 }
