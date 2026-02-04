@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+sudo xbps-install -Sy \
+  ruby-asciidoctor \
+  ImageMagick \
+  cmake \
+  base-devel \
+  pkg-config \
+  libxcb-devel \
+  pango-devel \
+  xcb-util-devel \
+  xcb-util-image-devel \
+  xcb-util-keysyms-devel \
+  xcb-util-wm-devel \
+  xcb-util-cursor-devel \
+  startup-notification-devel \
+  libxdg-basedir-devel \
+  gdk-pixbuf-devel \
+  dbus-devel \
+  libxkbcommon-devel \
+  xcb-util-xrm-devel \
+  lua53 \
+  lua53-devel \
+  lua53-lgi \
+  dbus-x11 \
+  pango
+

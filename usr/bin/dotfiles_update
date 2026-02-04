@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+ROOT_DIR="$(pwd)"
+CONFIG_DIR="$ROOT_DIR/usr/config"
+HOME_CONFIG="$HOME/.config"
+
+log() {
+    printf "[INFO] %s\n" "$1"
+}
+
+ensure_dir() {
+    mkdir -p "$1"
+}
+
+sync_dir() {
+    local src="$1"
+    local dest="$2"
+
+    if [[ -d "$src" ]]; then
+        ensure_dir "$dest"
+        rsync -avh --delete "$src/" "$dest/" >/dev/null
+        log "Ready ... $(basename "$dest")"
+    else
+        log "Skipped ... $(basename "$src") (not found)"
+    fi
+}
+sync_dir_no_delete() {
+    local src="$1"
+    local dest="$2"
+
+    if [[ -d "$src" ]]; then
+        ensure_dir "$dest"
+        rsync -avh "$src/" "$dest/" >/dev/null
+        log "Ready ... $(basename "$dest")"
+    else
+        log "Skipped ... $(basename "$src") (not found)"
+    fi
+}
+
+ensure_dir "$HOME_CONFIG"
+log "Config directory ready"
+
+#with delete
+sync_dir "$CONFIG_DIR/kitty" "$HOME_CONFIG/kitty"
+#with no delete
+#sync_dir_no_delete "$CONFIG_DIR/kitty" "$HOME_CONFIG/kitty"
+sync_dir_no_delete "$CONFIG_DIR/awesome" "$HOME_CONFIG/awesome"
+sync_dir_no_delete "$CONFIG_DIR/nvim" "$HOME_CONFIG/nvim"
+sync_dir_no_delete "$CONFIG_DIR/picom" "$HOME_CONFIG/picom"
+
+# ==========================================================
+# Code - OSS
+# ==========================================================
+CODE_OSS_DIR="Code - OSS"
+sync_dir "$CONFIG_DIR/$CODE_OSS_DIR" "$HOME_CONFIG/$CODE_OSS_DIR"
+
+# ==========================================================
+# Home dotfiles
+# ==========================================================
+for f in "$CONFIG_DIR/home/"*; do
+    [[ -f "$f" ]] || continue
+    rsync -avh "$f" "$HOME/.${f##*/}" >/dev/null
+    log "Ready ... .${f##*/}"
+done
+
+# ==========================================================
+# Rofi menu
+# ==========================================================
+ROFI_APP_DIR="$HOME/.local/share/applications"
+ensure_dir "$ROFI_APP_DIR"
+
+#cp "$CONFIG_DIR/usr/etc/chatgpt.desktop" "$ROFI_APP_DIR/"
+log "rofi menu updated"
+
+log "All setup completed ✔"
