@@ -59,6 +59,8 @@ nice{
 close_color = "#FF5F57",
 minimize_color 	= "#FF5F57",
 maximize_color = "#FF5F57",
+    button_size = 14,
+titlebar_height = 20,
 }
 
 -- This is used later as the default terminal and editor to run.
@@ -210,26 +212,26 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+--    s.mywibox = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-            s.mytaglist,
-            s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
-            s.mylayoutbox,
-        },
-    }
+--    s.mywibox:setup {
+--        layout = wibox.layout.align.horizontal,
+--        { -- Left widgets
+--            layout = wibox.layout.fixed.horizontal,
+--            mylauncher,
+--            s.mytaglist,
+--            s.mypromptbox,
+--        },
+--        s.mytasklist, -- Middle widget
+--        { -- Right widgets
+--            layout = wibox.layout.fixed.horizontal,
+--            mykeyboardlayout,
+--            wibox.widget.systray(),
+--            mytextclock,
+--            s.mylayoutbox,
+--        },
+--    }
 end)
 -- }}}
 
@@ -537,3 +539,4 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+awful.spawn("polybar")

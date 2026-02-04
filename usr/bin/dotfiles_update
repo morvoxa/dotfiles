@@ -46,6 +46,7 @@ log "Config directory ready"
 CODE_OSS_DIR="Code - OSS"
 sync_dir "$CONFIG_DIR/$CODE_OSS_DIR" "$HOME_CONFIG/$CODE_OSS_DIR"
 sync_dir "$CONFIG_DIR/kitty" "$HOME_CONFIG/kitty"
+sync_dir "$CONFIG_DIR/polybar" "$HOME_CONFIG/polybar"
 
 #with no delete
 #sync_dir_no_delete "$CONFIG_DIR/kitty" "$HOME_CONFIG/kitty"
