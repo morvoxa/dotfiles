@@ -18,4 +18,3 @@ vim.cmd([[
   highlight EndOfBuffer guibg=none
   highlight SignColumn guibg=none
 ]])
-
