@@ -1,49 +1,30 @@
-# Minimal Starship Prompt
-
 add_newline = false
 
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$python\
+$golang\
+$rust\
+$cmd_duration\
+$line_break\
+$character
+"""
+
 [directory]
+style = "blue"
 truncation_length = 3
-truncation_symbol = "…/"
-style = "cyan"
+truncate_to_repo = true
 
 [git_branch]
 symbol = " "
-style = "bold purple"
+style = "purple"
 
-[git_status]
-conflicted = "⚔️"
-ahead = "⬆️"
-behind = "⬇️"
-staged = "✔️"
-modified = "✏️"
-untracked = "🆕"
-stashed = "📦"
-style = "red"
-format = "($all_status)"
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
 
-[nodejs]
-symbol = "⬢ "
-style = "green"
-
-[python]
-symbol = "🐍 "
-style = "yellow"
-
-[docker_context]
-symbol = "🐳 "
-style = "blue"
-
-[kubernetes]
-symbol = "☸️ "
-style = "cyan"
-
-[battery]
-full_symbol = "🔋"
-charging_symbol = "⚡"
-discharging_symbol = "🔋"
-style = "bold green"
-
-[time]
-format = "[%H:%M]($style)"
-style = "white"
