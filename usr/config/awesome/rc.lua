@@ -235,6 +235,23 @@ end)
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
+local function toggle_wibar()
+	for s in screen do
+		if s.mywibox then
+			s.mywibox.visible = not s.mywibox.visible
+
+			if s.mywibox.visible then
+				s.mywibox:struts({
+					top = s.mywibox.height + s.mywibox.y,
+				})
+			else
+				s.mywibox:struts({
+					top = 0,
+				})
+			end
+		end
+	end
+end
 
 -- Signal untuk mode
 awesome_mode = "󰇙"
@@ -319,6 +336,8 @@ awful.screen.connect_for_each_screen(function(s)
 	s.mywibox:struts({
 		top = s.mywibox.height + s.mywibox.y,
 	})
+	s.mywibox.visible = false
+	s.mywibox:struts({ top = 0 })
 end)
 
 -- }}}

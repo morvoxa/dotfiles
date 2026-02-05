@@ -24,7 +24,8 @@
 
     {
       "before": ["<leader>", "t"],
-      "commands": ["workbench.action.terminal.toggleTerminal"]
+      "commands": ["workbench.action.terminal.toggleTerminal"],
+      "when": "editorTextFocus && vim.mode == 'Normal'"
     },
     {
       "before": ["<leader>", "x"],
