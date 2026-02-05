@@ -1,0 +1,48 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: false;
+    font: "JetBrains Mono 11";
+}
+
+* {
+    bg: #000000;
+    fg: #ffffff;
+}
+
+window {
+    width: 50%;
+    background-color: @bg;
+    border: 0;
+}
+
+inputbar {
+    background-color: @bg;
+    padding: 4px 6px;
+}
+
+prompt {
+    text-color: @fg;
+    padding: 0px 4px;
+}
+
+entry {
+    text-color: @fg;
+    padding: 2px 4px;
+}
+
+listview {
+    background-color: @bg;
+    lines: 8;
+    padding: 4px 6px;
+}
+
+element {
+    background-color: @bg;
+    text-color: @fg;
+    padding: 4px 6px;
+}
+
+element selected {
+    background-color: @bg;
+    text-color: @fg;
+}
