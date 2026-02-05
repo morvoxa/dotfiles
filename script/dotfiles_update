@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-ROOT_DIR="$(pwd)/usr"
+ROOT_DIR="$(pwd)"
 CONFIG_DIR="$ROOT_DIR/config"
 HOME_CONFIG="$HOME/.config"
 
@@ -49,9 +49,7 @@ sync_dir "$CONFIG_DIR/kitty" "$HOME_CONFIG/kitty"
 sync_dir "$CONFIG_DIR/polybar" "$HOME_CONFIG/polybar"
 sync_dir "$CONFIG_DIR/rofi" "$HOME_CONFIG/rofi"
 sync_dir "$CONFIG_DIR/starship" "$HOME_CONFIG/starship"
-
 #with no delete
-#sync_dir_no_delete "$CONFIG_DIR/kitty" "$HOME_CONFIG/kitty"
 sync_dir_no_delete "$CONFIG_DIR/awesome" "$HOME_CONFIG/awesome"
 sync_dir_no_delete "$CONFIG_DIR/nvim" "$HOME_CONFIG/nvim"
 sync_dir_no_delete "$CONFIG_DIR/picom" "$HOME_CONFIG/picom"
