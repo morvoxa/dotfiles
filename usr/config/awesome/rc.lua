@@ -35,7 +35,7 @@ end)
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
@@ -89,17 +89,17 @@ tag.connect_signal("request::default_layouts", function()
 	awful.layout.append_default_layouts({
 		awful.layout.suit.max,
 		awful.layout.suit.tile,
-		--awful.layout.suit.floating,
-		--awful.layout.suit.tile.left,
-		--awful.layout.suit.tile.bottom,
-		--awful.layout.suit.tile.top,
-		--awful.layout.suit.fair,
-		--awful.layout.suit.fair.horizontal,
-		--awful.layout.suit.spiral,
-		--awful.layout.suit.spiral.dwindle,
-		--awful.layout.suit.max.fullscreen,
-		--awful.layout.suit.magnifier,
-		--awful.layout.suit.corner.nw,
+		--	awful.layout.suit.floating,
+		--	awful.layout.suit.tile.left,
+		--	awful.layout.suit.tile.bottom,
+		--	awful.layout.suit.tile.top,
+		--	awful.layout.suit.fair,
+		--	awful.layout.suit.fair.horizontal,
+		--	awful.layout.suit.spiral,
+		--	awful.layout.suit.spiral.dwindle,
+		--	awful.layout.suit.max.fullscreen,
+		--	awful.layout.suit.magnifier,
+		--	awful.layout.suit.corner.nw,
 	})
 end)
 -- }}}
@@ -208,136 +208,27 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	})
 
 	-- Create the wibox
-	-- s.mywibox = awful.wibar {
-	--     position = "top",
-	--     screen   = s,
-	--     widget   = {
-	--         layout = wibox.layout.align.horizontal,
-	--         { -- Left widgets
-	--             layout = wibox.layout.fixed.horizontal,
-	--             mylauncher,
-	--             s.mytaglist,
-	--             s.mypromptbox,
-	--         },
-	--         s.mytasklist, -- Middle widget
-	--         { -- Right widgets
-	--             layout = wibox.layout.fixed.horizontal,
-	--             mykeyboardlayout,
-	--             wibox.widget.systray(),
-	--             mytextclock,
-	--             s.mylayoutbox,
-	--         },
-	--     }
-	-- }
-end)
--- awesome_center_wibar.lua
-
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local function toggle_wibar()
-	for s in screen do
-		if s.mywibox then
-			s.mywibox.visible = not s.mywibox.visible
-
-			if s.mywibox.visible then
-				s.mywibox:struts({
-					top = s.mywibox.height + s.mywibox.y,
-				})
-			else
-				s.mywibox:struts({
-					top = 0,
-				})
-			end
-		end
-	end
-end
-
--- Signal untuk mode
-awesome_mode = "󰇙"
-awesome.connect_signal("mode::change", function(mode)
-	awesome_mode = mode
-end)
-
-awful.screen.connect_for_each_screen(function(s)
-	-- Taglist (workspace)
-	s.mytaglist = awful.widget.taglist({
-		screen = s,
-		filter = awful.widget.taglist.filter.all,
-	})
-	-- Tasklist widget dengan icon + text
-	s.mytasklist = awful.widget.tasklist({
-		screen = s,
-		filter = awful.widget.tasklist.filter.focused, -- hanya window aktif
-		layout = {
-			spacing = 5,
-			layout = wibox.layout.fixed.horizontal,
-		},
-		widget_template = {
-			{
-				{
-					{
-						id = "icon_role",
-						widget = wibox.widget.imagebox, -- icon aplikasi
-					},
-					{
-						id = "text_role",
-						widget = wibox.widget.textbox, -- nama window
-					},
-					layout = wibox.layout.fixed.horizontal,
-					spacing = 5,
-				},
-				left = 5,
-				right = 5,
-				widget = wibox.container.margin,
-			},
-			widget = wibox.container.background,
-		},
-	})
-
-	-- Clock
-	mytextclock = wibox.widget.textclock()
-
-	-- Mode widget
-	s.awesome_mode_widget = wibox.widget({
-		text = awesome_mode,
-		widget = wibox.widget.textbox,
-	})
-
-	-- Update mode realtime
-	awesome.connect_signal("mode::change", function(mode)
-		s.awesome_mode_widget:set_text(mode)
-	end)
-
-	-- Wibar floating di tengah
 	s.mywibox = awful.wibar({
-		position = "top",
+		position = "bottom",
 		screen = s,
-		width = 1200, -- Lebar bar
-		height = 24, -- Tinggi bar
-		bg = "#1e1e2e",
-		fg = "#cdd6f4",
-		shape = function(cr, w, h)
-			gears.shape.rounded_rect(cr, w, h, 0)
-		end,
+		widget = {
+			layout = wibox.layout.align.horizontal,
+			{ -- Left widgets
+				layout = wibox.layout.fixed.horizontal,
+				mylauncher,
+				s.mytaglist,
+				s.mypromptbox,
+			},
+			s.mytasklist, -- Middle widget
+			{ -- Right widgets
+				layout = wibox.layout.fixed.horizontal,
+				mykeyboardlayout,
+				wibox.widget.systray(),
+				mytextclock,
+				s.mylayoutbox,
+			},
+		},
 	})
-
-	-- Posisi di tengah horizontal + padding atas
-	s.mywibox.x = (s.geometry.width - s.mywibox.width) / 2
-	s.mywibox.y = 10
-
-	-- Setup widget
-	s.mywibox:setup({
-		layout = wibox.layout.align.horizontal,
-		{ layout = wibox.layout.fixed.horizontal, mylauncher, s.mytaglist }, -- LEFT kosong
-		{ layout = wibox.layout.fixed.horizontal, s.mytasklist }, -- CENTER
-		{ layout = wibox.layout.fixed.horizontal, mytextclock, s.mylayoutbox }, -- RIGHT kosong
-	})
-	s.mywibox:struts({
-		top = s.mywibox.height + s.mywibox.y,
-	})
-	s.mywibox.visible = false
-	s.mywibox:struts({ top = 0 })
 end)
 
 -- }}}
@@ -630,7 +521,7 @@ ruled.client.connect_signal("request::rules", function()
 	ruled.client.append_rule({
 		id = "titlebars",
 		rule_any = { type = { "normal", "dialog" } },
-		properties = { titlebars_enabled = false },
+		properties = { titlebars_enabled = true },
 	})
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
@@ -704,4 +595,3 @@ end)
 client.connect_signal("mouse::enter", function(c)
 	c:activate({ context = "mouse_enter", raise = false })
 end)
-awful.spawn("picom")
